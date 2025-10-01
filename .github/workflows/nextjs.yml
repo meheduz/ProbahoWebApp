@@ -1,4 +1,4 @@
-name: Deploy Next.js site to Pages
+name: Deploy Probaho Web App to GitHub Pages
 
 on:
   push:
