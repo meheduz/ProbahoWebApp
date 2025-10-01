@@ -33,7 +33,7 @@ export default function HomePage() {
     {
       icon: WalletIcon,
       title: 'Unified Wallet',
-      description: 'Consolidate all your MFS balances in one secure place'
+      description: 'Transfer money between any MFS seamlessly'
     },
     {
       icon: ArrowsRightLeftIcon,
@@ -43,7 +43,7 @@ export default function HomePage() {
     {
       icon: ShieldCheckIcon,
       title: 'Bank-Grade Security',
-      description: 'Your funds are protected by partner bank custody'
+      description: 'Your funds are protected'
     },
     {
       icon: ClockIcon,
@@ -53,7 +53,7 @@ export default function HomePage() {
     {
       icon: CurrencyDollarIcon,
       title: 'Low Fees',
-      description: 'Save 80% compared to traditional cash-out methods'
+      description: 'Save  compared to traditional cash-out methods'
     },
     {
       icon: DevicePhoneMobileIcon,
@@ -283,10 +283,10 @@ export default function HomePage() {
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {[
-                { value: "130M+", label: "Registered MFS Users", icon: "👥" },
-                { value: "84.7%", label: "Users Face Transfer Problems", icon: "😤" },
-                { value: "6-12%", label: "Current Transfer Fees", icon: "💸" },
-                { value: "~1.5%", label: "Probaho Transfer Fee", icon: "💰" }
+                { value: "130M+", label: "Registered MFS Users" },
+                { value: "84.7%", label: "Users Face Transfer Problems"},
+                { value: "2+%", label: "Current Transfer Fees" },
+                { value: "2%", label: "Probaho Transfer Fee"}
               ].map((stat, index) => (
                 <motion.div
                   key={stat.label}
@@ -296,7 +296,6 @@ export default function HomePage() {
                   whileHover={{ scale: 1.05 }}
                   className="text-center bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20 hover:bg-white/15 transition-all duration-300"
                 >
-                  <div className="text-4xl mb-4">{stat.icon}</div>
                   <div className="text-4xl md:text-5xl font-bold mb-3 bg-gradient-to-r from-white to-blue-100 bg-clip-text text-transparent">
                     {stat.value}
                   </div>

@@ -1,9 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
   images: {
-    unoptimized: true,
+    domains: ['localhost'],
+    unoptimized: process.env.NODE_ENV === 'production',
   },
-  basePath: '/ProbahoWebApp',
-  assetPrefix: '/ProbahoWebApp',
 }

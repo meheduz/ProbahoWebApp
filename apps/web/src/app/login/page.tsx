@@ -254,20 +254,6 @@ export default function LoginPage() {
             Create New Account
           </Link>
         </motion.div>
-
-        {/* Demo Credentials */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.3 }}
-          className="mt-6 bg-blue-50 border border-blue-200 rounded-lg p-4"
-        >
-          <h3 className="font-medium text-blue-900 mb-2">Demo Credentials:</h3>
-          <div className="text-sm text-blue-800 space-y-1">
-            <p><strong>Phone:</strong> 01712345678</p>
-            <p><strong>PIN:</strong> 1234</p>
-          </div>
-        </motion.div>
       </motion.div>
     </div>
   )

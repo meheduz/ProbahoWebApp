@@ -18,6 +18,7 @@ import {
 import MFSLogo from '@/components/MFSLogo'
 import { MFSProvider } from '@/types'
 import { getMFSProviderName, getMFSProviderColor, formatCurrency, validateAmount, validatePhoneNumber } from '@/lib/utils'
+import { storage } from '@/lib/storage'
 
 const mfsProviders: MFSProvider[] = ['bkash', 'rocket', 'nagad', 'upay', 'tapp', 'mycash']
 
@@ -161,8 +162,35 @@ export default function SendMoneyPage() {
     setError('')
 
     try {
-      // Simulate API call for transfer
-      await new Promise(resolve => setTimeout(resolve, 2000))
+      // Calculate total amount including fee
+      const transferAmount = Number(amount);
+      const fee = calculateFee();
+      const totalAmount = transferAmount + fee;
+
+      // First record the main transfer
+      storage.addTransaction({
+        userId: '1', // This should come from auth context in real app
+        type: 'debit',
+        amount: transferAmount,
+        currency: 'BDT',
+        status: 'success',
+        description: `Sent money to ${selectedContact?.name}`,
+        mfsProvider: 'probaho',
+        recipientMfs: selectedContact?.mfs,
+        account: selectedContact?.phone,
+        note: note || undefined,
+      });
+
+      // Then record the fee transaction
+      storage.addTransaction({
+        userId: '1',
+        type: 'debit',
+        amount: fee,
+        currency: 'BDT',
+        status: 'success',
+        description: 'Transfer fee',
+        mfsProvider: 'probaho',
+      });
       
       // Mock success
       setStep('success')
