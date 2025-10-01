@@ -1,0 +1,239 @@
+'use client'
+
+import { useState, useEffect } from 'react'
+import { motion } from 'framer-motion'
+import { 
+  WalletIcon, 
+  EyeIcon, 
+  EyeSlashIcon,
+  ArrowTrendingUpIcon,
+  ArrowTrendingDownIcon
+} from '@heroicons/react/24/outline'
+import { formatCurrency } from '@/lib/utils'
+import { Wallet, Transaction } from '@/types'
+
+export default function WalletBalance() {
+  const [wallet, setWallet] = useState<Wallet | null>(null)
+  const [isBalanceVisible, setIsBalanceVisible] = useState(true)
+  const [isLoading, setIsLoading] = useState(true)
+  const [recentTransactions, setRecentTransactions] = useState<Transaction[]>([])
+  const [todayStats, setTodayStats] = useState({
+    sent: 0,
+    received: 0,
+    transactions: 0
+  })
+
+  // Mock data - replace with actual API calls
+  useEffect(() => {
+    const fetchWalletData = async () => {
+      setIsLoading(true)
+      // Simulate API call
+      setTimeout(() => {
+        setWallet({
+          id: '1',
+          userId: '1',
+          balance: 15750.50,
+          currency: 'BDT',
+          isActive: true,
+          createdAt: new Date(),
+          updatedAt: new Date()
+        })
+        
+        setRecentTransactions([
+          {
+            id: '1',
+            userId: '1',
+            type: 'credit',
+            amount: 5000,
+            currency: 'BDT',
+            status: 'completed',
+            description: 'Received from bKash',
+            mfsProvider: 'bkash',
+            createdAt: new Date(Date.now() - 1000 * 60 * 30) // 30 minutes ago
+          },
+          {
+            id: '2',
+            userId: '1',
+            type: 'debit',
+            amount: 2500,
+            currency: 'BDT',
+            status: 'completed',
+            description: 'Sent to Rocket',
+            recipientMfs: 'rocket',
+            createdAt: new Date(Date.now() - 1000 * 60 * 60 * 2) // 2 hours ago
+          }
+        ])
+        
+        setTodayStats({
+          sent: 2500,
+          received: 5000,
+          transactions: 2
+        })
+        
+        setIsLoading(false)
+      }, 1000)
+    }
+
+    fetchWalletData()
+  }, [])
+
+  if (isLoading) {
+    return (
+      <div className="card">
+        <div className="animate-pulse">
+          <div className="flex items-center justify-between mb-6">
+            <div className="h-6 w-24 bg-gray-200 rounded"></div>
+            <div className="h-6 w-6 bg-gray-200 rounded"></div>
+          </div>
+          <div className="h-12 w-32 bg-gray-200 rounded mb-4"></div>
+          <div className="h-4 w-20 bg-gray-200 rounded"></div>
+        </div>
+      </div>
+    )
+  }
+
+  if (!wallet) {
+    return (
+      <div className="card">
+        <div className="text-center py-8">
+          <WalletIcon className="h-12 w-12 text-gray-400 mx-auto mb-4" />
+          <p className="text-gray-500">Unable to load wallet</p>
+        </div>
+      </div>
+    )
+  }
+
+  return (
+    <div className="space-y-6">
+      {/* Main Balance Card */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="card bg-gradient-to-br from-primary-600 to-secondary-600 text-white"
+      >
+        <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center space-x-2">
+            <WalletIcon className="h-6 w-6" />
+            <span className="font-medium">Probaho Balance</span>
+          </div>
+          <button
+            onClick={() => setIsBalanceVisible(!isBalanceVisible)}
+            className="p-1 hover:bg-white/20 rounded-full transition-colors duration-200"
+          >
+            {isBalanceVisible ? (
+              <EyeSlashIcon className="h-5 w-5" />
+            ) : (
+              <EyeIcon className="h-5 w-5" />
+            )}
+          </button>
+        </div>
+
+        <div className="mb-6">
+          <div className="text-3xl font-bold mb-1">
+            {isBalanceVisible ? formatCurrency(wallet.balance) : '••••••'}
+          </div>
+          <div className="text-blue-100 text-sm">
+            Available Balance
+          </div>
+        </div>
+
+        <div className="flex items-center justify-between text-sm">
+          <div className="flex items-center space-x-1">
+            <ArrowTrendingUpIcon className="h-4 w-4 text-green-300" />
+            <span className="text-green-300">
+              +{formatCurrency(todayStats.received)}
+            </span>
+          </div>
+          <div className="flex items-center space-x-1">
+            <ArrowTrendingDownIcon className="h-4 w-4 text-red-300" />
+            <span className="text-red-300">
+              -{formatCurrency(todayStats.sent)}
+            </span>
+          </div>
+        </div>
+      </motion.div>
+
+      {/* Today's Activity */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.1 }}
+        className="card"
+      >
+        <h3 className="font-semibold text-gray-900 mb-4">Today's Activity</h3>
+        
+        <div className="grid grid-cols-3 gap-4">
+          <div className="text-center">
+            <div className="text-2xl font-bold text-green-600">
+              {formatCurrency(todayStats.received)}
+            </div>
+            <div className="text-sm text-gray-500">Received</div>
+          </div>
+          <div className="text-center">
+            <div className="text-2xl font-bold text-red-600">
+              {formatCurrency(todayStats.sent)}
+            </div>
+            <div className="text-sm text-gray-500">Sent</div>
+          </div>
+          <div className="text-center">
+            <div className="text-2xl font-bold text-primary-600">
+              {todayStats.transactions}
+            </div>
+            <div className="text-sm text-gray-500">Transactions</div>
+          </div>
+        </div>
+      </motion.div>
+
+      {/* Recent Transactions */}
+      {recentTransactions.length > 0 && (
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className="card"
+        >
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="font-semibold text-gray-900">Recent Activity</h3>
+            <a href="/history" className="text-primary-600 text-sm hover:text-primary-700">
+              View All
+            </a>
+          </div>
+          
+          <div className="space-y-3">
+            {recentTransactions.slice(0, 3).map((transaction) => (
+              <div key={transaction.id} className="flex items-center justify-between py-2">
+                <div className="flex items-center space-x-3">
+                  <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
+                    transaction.type === 'credit' 
+                      ? 'bg-green-100 text-green-600' 
+                      : 'bg-red-100 text-red-600'
+                  }`}>
+                    {transaction.type === 'credit' ? (
+                      <ArrowTrendingUpIcon className="h-5 w-5" />
+                    ) : (
+                      <ArrowTrendingDownIcon className="h-5 w-5" />
+                    )}
+                  </div>
+                  <div>
+                    <div className="font-medium text-gray-900 text-sm">
+                      {transaction.description}
+                    </div>
+                    <div className="text-xs text-gray-500">
+                      {transaction.createdAt.toLocaleTimeString()}
+                    </div>
+                  </div>
+                </div>
+                <div className={`font-semibold ${
+                  transaction.type === 'credit' ? 'text-green-600' : 'text-red-600'
+                }`}>
+                  {transaction.type === 'credit' ? '+' : '-'}
+                  {formatCurrency(transaction.amount)}
+                </div>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+      )}
+    </div>
+  )
+}

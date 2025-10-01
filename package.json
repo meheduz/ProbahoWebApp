@@ -1,0 +1,25 @@
+{
+  "name": "probaho-wallet",
+  "version": "0.1.0",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "test": "turbo run test",
+    "clean": "turbo run clean",
+    "type-check": "turbo run type-check",
+    "dev:web": "npm run dev --workspace=@probaho/web",
+    "dev:mobile": "npm run start --workspace=@probaho/mobile",
+    "build:shared": "npm run build --workspace=@probaho/shared"
+  },
+  "devDependencies": {
+    "turbo": "^1.10.12",
+    "@types/node": "^20",
+    "typescript": "^5"
+  }
+}

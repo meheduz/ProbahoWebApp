@@ -1,0 +1,63 @@
+{
+  "expo": {
+    "name": "Probaho",
+    "slug": "probaho-wallet",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#2563eb"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.probaho.wallet",
+      "buildNumber": "1.0.0",
+      "infoPlist": {
+        "NSCameraUsageDescription": "This app needs access to camera to scan QR codes for payments.",
+        "NSFaceIDUsageDescription": "This app uses Face ID for secure authentication.",
+        "NSMicrophoneUsageDescription": "This app needs access to microphone for voice authentication."
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#2563eb"
+      },
+      "package": "com.probaho.wallet",
+      "versionCode": 1,
+      "permissions": [
+        "CAMERA",
+        "USE_FINGERPRINT",
+        "USE_BIOMETRIC",
+        "RECEIVE_SMS",
+        "READ_SMS",
+        "VIBRATE",
+        "INTERNET",
+        "ACCESS_NETWORK_STATE"
+      ]
+    },
+    "web": {
+      "favicon": "./assets/favicon.png",
+      "bundler": "metro"
+    },
+    "plugins": [
+      "expo-camera",
+      "expo-barcode-scanner",
+      "expo-local-authentication",
+      "expo-secure-store",
+      "expo-notifications"
+    ],
+    "scheme": "probaho",
+    "extra": {
+      "eas": {
+        "projectId": "probaho-wallet-project"
+      }
+    }
+  }
+}
