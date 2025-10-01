@@ -1,10 +1,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',  // Enable static exports
+  output: 'export',
+  trailingSlash: true,
   images: {
-    unoptimized: true,  // Required for static export
-    domains: ['localhost', 'probaho.app'],
+    unoptimized: true,
+    loader: 'custom',
+    loaderFile: './image-loader.js',
   },
   transpilePackages: ['@probaho/shared'],
-  basePath: '/ProbahoWebApp',  // Required for GitHub Pages
+  basePath: process.env.NEXT_PUBLIC_BASE_PATH || '',
+  assetPrefix: process.env.NEXT_PUBLIC_BASE_PATH || '',
 }
