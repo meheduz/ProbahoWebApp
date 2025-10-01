@@ -174,7 +174,11 @@ export default function SendMoneyPage() {
   }
 
   const calculateFee = () => {
-    return 20 // Fixed fee of 20 taka for all transactions
+    const amountNum = Number(amount)
+    // Calculate 2% of the amount
+    const fee = Math.ceil(amountNum * 0.02)
+    // Return the calculated fee
+    return fee
   }
 
   const getTotalAmount = () => {
