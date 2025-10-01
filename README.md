@@ -1,4 +1,169 @@
-# Probaho: Cross-MFS Unified Wallet
+# Probaho - Digital Wallet with MFS Integration
+
+Probaho is a modern digital wallet application that integrates with popular Mobile Financial Services (MFS) in Bangladesh. It provides a seamless platform for managing digital transactions, including money transfers and payments through various MFS providers.
+
+## Features
+
+### 💳 Digital Wallet Management
+- Real-time wallet balance tracking
+- Transaction history with detailed logs
+- Secure PIN-based authentication
+- Multi-currency support (focused on BDT)
+
+### 🔄 MFS Integration
+- Support for major MFS providers:
+  - bKash
+  - Nagad
+  - Rocket
+  - Upay
+
+### 💸 Money Transfer Features
+- Send money to other Probaho users
+- Add money from MFS accounts
+- Real-time transaction status
+- Transaction fee calculation
+- Daily transaction limits
+
+### 🔒 Security Features
+- PIN-protected transactions
+- OTP verification for sensitive operations
+- Session management
+- Transaction monitoring
+
+## Tech Stack
+
+### Frontend (Web)
+- Next.js 14
+- TypeScript
+- Tailwind CSS
+- Framer Motion
+- React Query
+
+### Mobile App
+- React Native
+- TypeScript
+- Native Base
+
+### Shared Infrastructure
+- Turborepo for monorepo management
+- TypeScript for type safety
+- Shared component library
+- Consistent styling system
+
+## Project Structure
+
+```
+probaho/
+├── apps/
+│   ├── web/               # Next.js web application
+│   │   ├── src/
+│   │   │   ├── app/      # App router pages
+│   │   │   ├── components/
+│   │   │   ├── contexts/
+│   │   │   └── lib/
+│   │   └── public/
+│   └── mobile/           # React Native mobile app
+│       ├── src/
+│       ├── screens/
+│       └── components/
+└── packages/
+    └── shared/           # Shared utilities and types
+```
+
+## Getting Started
+
+### Prerequisites
+- Node.js 18 or higher
+- npm or yarn
+- Git
+
+### Installation
+
+1. Clone the repository:
+\`\`\`bash
+git clone https://github.com/meheduz/ProbahoWebApp.git
+cd ProbahoWebApp
+\`\`\`
+
+2. Install dependencies:
+\`\`\`bash
+npm install
+\`\`\`
+
+3. Start the development server:
+\`\`\`bash
+# For web application
+cd apps/web
+npm run dev
+
+# For mobile application
+cd apps/mobile
+npm run start
+\`\`\`
+
+### Environment Variables
+
+Create a \`.env.local\` file in the web application directory:
+
+\`\`\`env
+NEXT_PUBLIC_BASE_PATH=/ProbahoWebApp
+\`\`\`
+
+## Transaction Limits
+
+### Add Money Limits
+- bKash: ৳50,000 per transaction, ৳100,000 daily
+- Nagad: ৳40,000 per transaction, ৳80,000 daily
+- Rocket: ৳30,000 per transaction, ৳60,000 daily
+- Upay: ৳25,000 per transaction, ৳50,000 daily
+
+### Send Money
+- Minimum: ৳10
+- Maximum: ৳100,000 per transaction
+- Fee: Fixed ৳20 per transaction
+
+## Development
+
+### Web Application
+The web application is built with Next.js and follows modern React patterns:
+- App Router for routing
+- Server Components where applicable
+- Client Components for interactive features
+- Tailwind CSS for styling
+- TypeScript for type safety
+
+### Mobile Application
+The mobile app is built with React Native and includes:
+- Native navigation
+- Offline support
+- Biometric authentication
+- Push notifications
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch (\`git checkout -b feature/AmazingFeature\`)
+3. Commit your changes (\`git commit -m 'Add some AmazingFeature'\`)
+4. Push to the branch (\`git push origin feature/AmazingFeature\`)
+5. Open a Pull Request
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Acknowledgments
+
+- Built with modern web technologies
+- Designed for Bangladesh's digital payment ecosystem
+- Focus on user security and convenience
+
+## Contact
+
+Project Link: [https://github.com/meheduz/ProbahoWebApp](https://github.com/meheduz/ProbahoWebApp)
+
+---
+
+Made with ❤️ for Bangladesh's digital payment ecosystem
 
 **Tagline:** Your Money, Your Control
 
