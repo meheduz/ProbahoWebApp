@@ -4,7 +4,6 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  transpilePackages: ['@probaho/shared'],
   basePath: '/ProbahoWebApp',
   assetPrefix: '/ProbahoWebApp',
 }
