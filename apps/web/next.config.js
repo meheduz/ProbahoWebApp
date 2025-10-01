@@ -5,8 +5,9 @@ const nextConfig = {
     unoptimized: true,
   },
   transpilePackages: ['@probaho/shared'],
-  basePath: '/ProbahoWebApp',
-  assetPrefix: '/ProbahoWebApp',
+  basePath: process.env.NEXT_PUBLIC_BASE_PATH || '',
+  assetPrefix: process.env.NEXT_PUBLIC_BASE_PATH || '',
   reactStrictMode: true,
-  swcMinify: true,
+  distDir: 'out',
+  cleanDistDir: true,
 }

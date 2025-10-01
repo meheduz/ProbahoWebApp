@@ -26,9 +26,6 @@ jobs:
         with:
           node-version: "18"
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
-
       - name: Install dependencies
         run: |
           npm install -g turbo
@@ -39,14 +36,20 @@ jobs:
       - name: Build web app
         run: |
           cd apps/web
+          echo "NEXT_PUBLIC_BASE_PATH=/ProbahoWebApp" > .env.local
           npm run build
-        env:
-          NEXT_PUBLIC_BASE_PATH: /ProbahoWebApp
+          touch out/.nojekyll
+          cp -r out/* ../..
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+        with:
+          enablement: true
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
-          path: apps/web/out
+          path: ./apps/web/out
 
   deploy:
     environment:
@@ -58,5 +61,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v3
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
