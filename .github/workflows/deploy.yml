@@ -1,18 +1,14 @@
-name: Deploy Probaho Web App to GitHub Pages
+name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: ["main"]
+    branches: [ main ]
   workflow_dispatch:
-
-permissions:
-  contents: write
-  pages: write
-  id-token: write
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -21,10 +17,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '18'
+          cache: 'npm'
 
-      - name: Install dependencies
+      - name: Install Dependencies
         run: |
-          npm install -g turbo
           npm install
           cd apps/web
           npm install
@@ -32,13 +28,16 @@ jobs:
       - name: Build
         run: |
           cd apps/web
+          rm -rf .next out
           echo "NEXT_PUBLIC_BASE_PATH=/ProbahoWebApp" > .env.local
           npm run build
-          touch out/.nojekyll
+          cp -r out/* ../../docs
+          touch ../../docs/.nojekyll
 
-      - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          branch: gh-pages
-          folder: apps/web/out
-          clean: true
+      - name: Deploy
+        run: |
+          git config --global user.name "GitHub Actions Bot"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/
+          git commit -m "Deploy to GitHub Pages"
+          git push origin main
