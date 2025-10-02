@@ -5,6 +5,7 @@ import { storage } from "../../lib/storage";
 import { useRouter } from "next/navigation";
 import Image from 'next/image';
 import MFSLogo from '@/components/MFSLogo';
+import { generateTransactionId as generateSecureTxnId } from '@/lib/utils';
 
 const mfsLimits = {
   bkash: { min: 10, max: 50000, daily: 100000, prefix: '01', length: 11 },
@@ -44,9 +45,7 @@ const mfsOptions = [
   }
 ];
 
-const generateTxnId = () => {
-  return `TXN${Date.now()}${Math.random().toString(36).substring(2, 7)}`.toUpperCase();
-};
+const generateTxnId = () => generateSecureTxnId();
 
 const AddMoneyPage = () => {
   const [step, setStep] = useState<'method' | 'details' | 'confirm'>('method');
@@ -133,7 +132,8 @@ const AddMoneyPage = () => {
     }
   };
 
-  const handleTopup = () => {
+  const handleTopup = async () => {
+    if (loading) return;
     try {
       if (!validateStep('confirm')) {
         return;
@@ -141,56 +141,43 @@ const AddMoneyPage = () => {
 
       setLoading(true);
       const numAmount = Number(amount);
-      
+
       // Get current daily stats to check limits
       const dailyStats = storage.getDailyStats();
       const limits = mfsLimits[selectedMfs as keyof typeof mfsLimits];
-      
+
       if (dailyStats.received + numAmount > limits.daily) {
         setError(`Daily deposit limit (${limits.daily.toLocaleString()} BDT) exceeded for ${selectedMfs}`);
-        setLoading(false);
         return;
       }
 
       // Simulate API call delay
-      const timer = setTimeout(() => {
-              const timer = setTimeout(() => {
-        try {
-          // Create a transaction record and update wallet
-          storage.addTransaction({
-            userId: '1', // In a real app, this would come from auth
-            type: 'credit',
-            amount: numAmount,
-            currency: 'BDT',
-            status: 'success',
-            description: `Added money from ${mfsOptions.find(m => m.id === selectedMfs)?.name}`,
-            mfsProvider: selectedMfs,
-            account: account,
-            note: `TxnID: ${txnId}`
-          });
+      await new Promise(resolve => setTimeout(resolve, 1500));
 
-          // Reset form and redirect
-          setAmount("");
-          setError("");
-          setSelectedMfs("");
-          setAccount("");
-          setOtp("");
-          setTxnId("");
-          router.push('/');
-        } catch (err) {
-          console.error('Transaction failed:', err);
-          setError("Transaction failed. Please try again.");
-        } finally {
-          setLoading(false);
-        }
-      }, 1500);
+      // Create a transaction record and update wallet (idempotent per click)
+      storage.addTransaction({
+        userId: '1', // In a real app, this would come from auth
+        type: 'credit',
+        amount: numAmount,
+        currency: 'BDT',
+        status: 'success',
+        description: `Added money from ${mfsOptions.find(m => m.id === selectedMfs)?.name}`,
+        mfsProvider: selectedMfs,
+        account: account,
+        note: `TxnID: ${txnId}`
+      });
 
-      // Cleanup timer if component unmounts
-      return () => clearTimeout(timer);
-      }, 1500);
+      // Reset form and redirect
+      setAmount("");
+      setError("");
+      setSelectedMfs("");
+      setAccount("");
+      setOtp("");
+      setTxnId("");
+      router.push('/');
     } catch (err) {
-      setError("Something went wrong. Please try again.");
-      console.error(err);
+      console.error('Transaction failed:', err);
+      setError("Transaction failed. Please try again.");
     } finally {
       setLoading(false);
     }

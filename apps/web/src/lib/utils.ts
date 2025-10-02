@@ -44,7 +44,15 @@ export function validatePhoneNumber(phone: string): boolean {
 // Generate transaction ID
 export function generateTransactionId(): string {
   const timestamp = Date.now().toString(36)
-  const random = Math.random().toString(36).substring(2, 8)
+  const array = new Uint8Array(6)
+  if (typeof crypto !== 'undefined' && typeof crypto.getRandomValues === 'function') {
+    crypto.getRandomValues(array)
+  } else {
+    for (let i = 0; i < array.length; i++) {
+      array[i] = Math.floor(Math.random() * 256)
+    }
+  }
+  const random = Array.from(array, b => b.toString(16).padStart(2, '0')).join('').slice(0, 12)
   return `TXN_${timestamp}_${random}`.toUpperCase()
 }
 
@@ -52,8 +60,16 @@ export function generateTransactionId(): string {
 export function generateOTP(length: number = 6): string {
   const digits = '0123456789'
   let otp = ''
+  const array = new Uint8Array(length)
+  if (typeof crypto !== 'undefined' && typeof crypto.getRandomValues === 'function') {
+    crypto.getRandomValues(array)
+  } else {
+    for (let i = 0; i < array.length; i++) {
+      array[i] = Math.floor(Math.random() * 256)
+    }
+  }
   for (let i = 0; i < length; i++) {
-    otp += digits[Math.floor(Math.random() * digits.length)]
+    otp += digits[array[i] % digits.length]
   }
   return otp
 }
