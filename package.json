@@ -1,0 +1,15 @@
+{
+  "name": "probaho-static-server",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "compression": "^1.7.4",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2"
+  }
+}
