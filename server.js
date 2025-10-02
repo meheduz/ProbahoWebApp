@@ -11,7 +11,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
-const port = process.env.PORT || 3000;
+const requestedPort = process.env.PORT ? Number(process.env.PORT) : 3000;
 
 app.use(compression());
 app.use(express.json());
@@ -32,7 +32,9 @@ app.post('/api/payment/create', (req, res) => {
     const payload = `${sessionId}|${tx}|${provider}|${amount}`;
     const sig = crypto.createHmac('sha256', secret).update(payload).digest('hex');
 
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || `http://localhost:${port}`;
+    // Prefer explicit base URL if provided, otherwise infer from request
+    const inferredBase = `${req.protocol}://${req.get('host')}`;
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || inferredBase;
     const qs = new URLSearchParams({ sessionId, tx, provider, amount: String(amount), sig });
     const redirectUrl = `${baseUrl}/api/payment/mock-gateway?${qs.toString()}`;
 
@@ -59,7 +61,8 @@ app.get('/api/payment/mock-gateway', (req, res) => {
     return;
   }
 
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || `http://localhost:${port}`;
+  const inferredBase = `${req.protocol}://${req.get('host')}`;
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || inferredBase;
   const confirmUrl = `${baseUrl}/add-money/confirm?sessionId=${encodeURIComponent(sessionId)}&tx=${encodeURIComponent(tx)}&provider=${encodeURIComponent(provider)}&amount=${encodeURIComponent(amount)}&sig=${encodeURIComponent(sig)}`;
 
   const html = `
@@ -125,6 +128,9 @@ app.use((req, res) => {
   res.sendFile(path.join(staticDir, 'index.html'));
 });
 
-app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`);
+const server = app.listen(requestedPort, () => {
+  const address = server.address();
+  // address can be string or object; normalize to port number
+  const actualPort = typeof address === 'object' && address ? address.port : requestedPort;
+  console.log(`Server running on http://localhost:${actualPort}`);
 });
