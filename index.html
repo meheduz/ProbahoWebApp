@@ -97,8 +97,8 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
                             </svg>
                             <div class="hidden sm:block text-left">
-                                <p class="text-sm font-medium text-gray-900">Probaho User</p>
-                                <p class="text-xs text-gray-500">+880 1XXX XXX XXX</p>
+                                <p class="text-sm font-medium text-gray-900" data-user-name>Probaho User</p>
+                                <p class="text-xs text-gray-500" data-user-phone>+880 1XXX XXX XXX</p>
                             </div>
                         </button>
                     </div>
@@ -177,7 +177,7 @@
                         </div>
                         
                         <div class="text-center mb-6">
-                            <div class="text-4xl font-bold text-gray-900 mb-2">12,500 BDT</div>
+                            <div class="text-4xl font-bold text-gray-900 mb-2" data-balance>12,500 BDT</div>
                             <p class="text-sm text-gray-500">Total Available Balance</p>
                         </div>
 
@@ -188,28 +188,28 @@
                                     <div class="w-3 h-3 rounded-full bg-pink-500"></div>
                                     <span class="text-sm font-medium text-gray-700">bKash</span>
                                 </div>
-                                <span class="text-sm font-semibold text-gray-900">2,500 BDT</span>
+                                <span class="text-sm font-semibold text-gray-900" data-mfs-balance data-provider="bkash">2,500 BDT</span>
                             </div>
                             <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                                 <div class="flex items-center space-x-3">
                                     <div class="w-3 h-3 rounded-full bg-orange-500"></div>
                                     <span class="text-sm font-medium text-gray-700">Nagad</span>
                                 </div>
-                                <span class="text-sm font-semibold text-gray-900">3,000 BDT</span>
+                                <span class="text-sm font-semibold text-gray-900" data-mfs-balance data-provider="nagad">3,000 BDT</span>
                             </div>
                             <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                                 <div class="flex items-center space-x-3">
                                     <div class="w-3 h-3 rounded-full bg-blue-500"></div>
                                     <span class="text-sm font-medium text-gray-700">Rocket</span>
                                 </div>
-                                <span class="text-sm font-semibold text-gray-900">4,000 BDT</span>
+                                <span class="text-sm font-semibold text-gray-900" data-mfs-balance data-provider="rocket">4,000 BDT</span>
                             </div>
                             <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                                 <div class="flex items-center space-x-3">
                                     <div class="w-3 h-3 rounded-full bg-purple-500"></div>
                                     <span class="text-sm font-medium text-gray-700">Upay</span>
                                 </div>
-                                <span class="text-sm font-semibold text-gray-900">3,000 BDT</span>
+                                <span class="text-sm font-semibold text-gray-900" data-mfs-balance data-provider="upay">3,000 BDT</span>
                             </div>
                         </div>
                     </div>
@@ -221,34 +221,34 @@
                         <h3 class="text-lg font-semibold text-gray-900 mb-6">Quick Actions</h3>
                         
                         <div class="grid grid-cols-2 gap-4">
-                            <a href="/send-money" class="bg-gradient-to-br from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 rounded-xl p-4 text-white cursor-pointer transition-all duration-300 shadow-lg hover:shadow-xl">
+                            <button data-action="send-money" class="bg-gradient-to-br from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 rounded-xl p-4 text-white cursor-pointer transition-all duration-300 shadow-lg hover:shadow-xl">
                                 <div class="flex flex-col items-center text-center">
                                     <div class="text-2xl mb-2">💸</div>
                                     <h4 class="font-semibold text-sm mb-1">Send Money</h4>
                                     <p class="text-xs opacity-90">Transfer to any MFS</p>
                                 </div>
-                            </a>
-                            <a href="/add-money" class="bg-gradient-to-br from-blue-500 to-cyan-600 hover:from-blue-600 hover:to-cyan-700 rounded-xl p-4 text-white cursor-pointer transition-all duration-300 shadow-lg hover:shadow-xl">
+                            </button>
+                            <button data-action="add-money" class="bg-gradient-to-br from-blue-500 to-cyan-600 hover:from-blue-600 hover:to-cyan-700 rounded-xl p-4 text-white cursor-pointer transition-all duration-300 shadow-lg hover:shadow-xl">
                                 <div class="flex flex-col items-center text-center">
                                     <div class="text-2xl mb-2">💰</div>
                                     <h4 class="font-semibold text-sm mb-1">Add Money</h4>
                                     <p class="text-xs opacity-90">Top up your wallet</p>
                                 </div>
-                            </a>
-                            <a href="/history" class="bg-gradient-to-br from-purple-500 to-violet-600 hover:from-purple-600 hover:to-violet-700 rounded-xl p-4 text-white cursor-pointer transition-all duration-300 shadow-lg hover:shadow-xl">
+                            </button>
+                            <button data-action="history" class="bg-gradient-to-br from-purple-500 to-violet-600 hover:from-purple-600 hover:to-violet-700 rounded-xl p-4 text-white cursor-pointer transition-all duration-300 shadow-lg hover:shadow-xl">
                                 <div class="flex flex-col items-center text-center">
                                     <div class="text-2xl mb-2">📊</div>
                                     <h4 class="font-semibold text-sm mb-1">History</h4>
                                     <p class="text-xs opacity-90">View transactions</p>
                                 </div>
-                            </a>
-                            <a href="/help" class="bg-gradient-to-br from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 rounded-xl p-4 text-white cursor-pointer transition-all duration-300 shadow-lg hover:shadow-xl">
+                            </button>
+                            <button data-action="help" class="bg-gradient-to-br from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 rounded-xl p-4 text-white cursor-pointer transition-all duration-300 shadow-lg hover:shadow-xl">
                                 <div class="flex flex-col items-center text-center">
                                     <div class="text-2xl mb-2">❓</div>
                                     <h4 class="font-semibold text-sm mb-1">Help</h4>
                                     <p class="text-xs opacity-90">Get support</p>
                                 </div>
-                            </a>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -261,7 +261,7 @@
                     <button class="text-primary-600 hover:text-primary-700 text-sm font-medium">View All</button>
                 </div>
 
-                <div class="space-y-4">
+                <div class="space-y-4" data-transactions>
                     <div class="flex items-center space-x-4 p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-200">
                         <div class="w-10 h-10 bg-gradient-to-r from-primary-100 to-secondary-100 rounded-lg flex items-center justify-center">
                             <span class="text-lg">💰</span>
@@ -364,7 +364,10 @@
                     <p><strong>Phone:</strong> 01712345678</p>
                     <p><strong>PIN:</strong> 1234</p>
                 </div>
-                <p class="text-sm mt-4 opacity-90">Use these credentials to test the application</p>
+                <p class="text-sm mt-4 opacity-90 mb-4">Use these credentials to test the application</p>
+                <button id="demo-login" class="bg-white text-primary-600 hover:bg-gray-100 font-semibold py-2 px-6 rounded-lg transition-all duration-200 transform hover:scale-105">
+                    🚀 Try Demo Login
+                </button>
             </div>
         </div>
     </section>
@@ -386,29 +389,390 @@
     </footer>
 
     <script>
-        // Simple client-side routing
-        document.addEventListener('DOMContentLoaded', function() {
-            // Add click handlers for navigation
-            const links = document.querySelectorAll('a[href^="/"]');
-            links.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const href = this.getAttribute('href');
-                    
-                    if (href === '/login') {
-                        window.location.href = '/login.html';
-                    } else if (href === '/signup') {
-                        window.location.href = '/signup.html';
-                    } else if (href === '/add-money') {
+        // Enhanced Probaho Application
+        class ProbahoApp {
+            constructor() {
+                this.currentUser = null;
+                this.isAuthenticated = false;
+                this.baseURL = window.location.origin;
+                this.init();
+            }
+
+            async init() {
+                this.setupEventListeners();
+                await this.checkAuthentication();
+                this.loadDashboardData();
+                this.setupAnimations();
+            }
+
+            setupEventListeners() {
+                // Navigation links
+                const links = document.querySelectorAll('a[href^="/"]');
+                links.forEach(link => {
+                    link.addEventListener('click', (e) => this.handleNavigation(e, link));
+                });
+
+                // Quick action buttons
+                const quickActions = document.querySelectorAll('[data-action]');
+                quickActions.forEach(button => {
+                    button.addEventListener('click', (e) => this.handleQuickAction(e, button));
+                });
+
+                // Demo login button
+                const demoLoginBtn = document.getElementById('demo-login');
+                if (demoLoginBtn) {
+                    demoLoginBtn.addEventListener('click', () => this.demoLogin());
+                }
+            }
+
+            async handleNavigation(e, link) {
+                e.preventDefault();
+                const href = link.getAttribute('href');
+                
+                if (href === '/login') {
+                    window.location.href = '/login.html';
+                } else if (href === '/signup') {
+                    window.location.href = '/signup.html';
+                } else if (href === '/add-money') {
+                    if (this.isAuthenticated) {
                         window.location.href = '/add-money.html';
-                    } else if (href === '/send-money') {
+                    } else {
+                        this.showLoginPrompt();
+                    }
+                } else if (href === '/send-money') {
+                    if (this.isAuthenticated) {
                         window.location.href = '/send-money.html';
                     } else {
-                        // For other routes, show a simple message
-                        alert('This feature is coming soon!');
+                        this.showLoginPrompt();
+                    }
+                } else {
+                    this.showComingSoon();
+                }
+            }
+
+            async handleQuickAction(e, button) {
+                e.preventDefault();
+                const action = button.getAttribute('data-action');
+                
+                if (!this.isAuthenticated) {
+                    this.showLoginPrompt();
+                    return;
+                }
+
+                switch (action) {
+                    case 'send-money':
+                        window.location.href = '/send-money.html';
+                        break;
+                    case 'add-money':
+                        window.location.href = '/add-money.html';
+                        break;
+                    case 'history':
+                        this.showTransactionHistory();
+                        break;
+                    case 'help':
+                        this.showHelp();
+                        break;
+                }
+            }
+
+            async checkAuthentication() {
+                try {
+                    const token = localStorage.getItem('probaho_token');
+                    if (token) {
+                        const response = await fetch(`${this.baseURL}/api/user/profile`, {
+                            headers: {
+                                'Authorization': `Bearer ${token}`
+                            }
+                        });
+                        
+                        if (response.ok) {
+                            this.currentUser = await response.json();
+                            this.isAuthenticated = true;
+                            this.updateUIForAuthenticatedUser();
+                        } else {
+                            localStorage.removeItem('probaho_token');
+                        }
+                    }
+                } catch (error) {
+                    console.log('Authentication check failed:', error);
+                }
+            }
+
+            async loadDashboardData() {
+                if (!this.isAuthenticated) return;
+
+                try {
+                    // Load wallet balance
+                    const balanceResponse = await fetch(`${this.baseURL}/api/wallet/balance`);
+                    if (balanceResponse.ok) {
+                        const balanceData = await balanceResponse.json();
+                        this.updateWalletBalance(balanceData);
+                    }
+
+                    // Load transactions
+                    const transactionsResponse = await fetch(`${this.baseURL}/api/transactions`);
+                    if (transactionsResponse.ok) {
+                        const transactions = await transactionsResponse.json();
+                        this.updateTransactionHistory(transactions);
+                    }
+                } catch (error) {
+                    console.log('Failed to load dashboard data:', error);
+                }
+            }
+
+            updateWalletBalance(data) {
+                const balanceElement = document.querySelector('[data-balance]');
+                if (balanceElement) {
+                    balanceElement.textContent = `${data.totalBalance.toLocaleString()} ${data.currency}`;
+                }
+
+                // Update MFS balances
+                const mfsBalances = document.querySelectorAll('[data-mfs-balance]');
+                mfsBalances.forEach(element => {
+                    const provider = element.getAttribute('data-provider');
+                    const mfsData = data.mfsBalances.find(mfs => mfs.provider.toLowerCase() === provider.toLowerCase());
+                    if (mfsData) {
+                        element.textContent = `${mfsData.balance.toLocaleString()} ${data.currency}`;
                     }
                 });
-            });
+            }
+
+            updateTransactionHistory(transactions) {
+                const container = document.querySelector('[data-transactions]');
+                if (!container) return;
+
+                if (transactions.length === 0) {
+                    container.innerHTML = `
+                        <div class="text-center py-8">
+                            <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <span class="text-2xl text-gray-400">📊</span>
+                            </div>
+                            <h4 class="text-gray-500 font-medium mb-2">No transactions yet</h4>
+                            <p class="text-sm text-gray-400">Your transaction history will appear here</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                container.innerHTML = transactions.slice(0, 5).map(transaction => `
+                    <div class="flex items-center space-x-4 p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-200">
+                        <div class="w-10 h-10 bg-gradient-to-r from-primary-100 to-secondary-100 rounded-lg flex items-center justify-center">
+                            <span class="text-lg">${this.getTransactionIcon(transaction.type)}</span>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex items-center justify-between">
+                                <h4 class="text-sm font-medium text-gray-900">${transaction.description}</h4>
+                                <span class="text-sm font-semibold ${transaction.type === 'credit' ? 'text-green-600' : 'text-red-600'}">
+                                    ${transaction.type === 'credit' ? '+' : '-'}${transaction.amount.toLocaleString()} ${transaction.currency}
+                                </span>
+                            </div>
+                            <div class="flex items-center justify-between mt-1">
+                                <div class="flex items-center space-x-2">
+                                    <span class="text-xs text-gray-500">${transaction.provider}</span>
+                                    <span class="px-2 py-1 rounded-full text-xs font-medium ${this.getStatusColor(transaction.status)}">
+                                        ${transaction.status}
+                                    </span>
+                                </div>
+                                <span class="text-xs text-gray-500">${this.formatTimeAgo(transaction.timestamp)}</span>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            getTransactionIcon(type) {
+                return type === 'credit' ? '💰' : '💸';
+            }
+
+            getStatusColor(status) {
+                switch (status) {
+                    case 'success': return 'text-green-600 bg-green-100';
+                    case 'pending': return 'text-yellow-600 bg-yellow-100';
+                    case 'failed': return 'text-red-600 bg-red-100';
+                    default: return 'text-gray-600 bg-gray-100';
+                }
+            }
+
+            formatTimeAgo(timestamp) {
+                const now = new Date();
+                const time = new Date(timestamp);
+                const diffInHours = Math.floor((now - time) / (1000 * 60 * 60));
+                
+                if (diffInHours < 1) return 'Just now';
+                if (diffInHours < 24) return `${diffInHours}h ago`;
+                const diffInDays = Math.floor(diffInHours / 24);
+                return `${diffInDays}d ago`;
+            }
+
+            updateUIForAuthenticatedUser() {
+                // Update user info in header
+                const userElements = document.querySelectorAll('[data-user-name]');
+                userElements.forEach(element => {
+                    element.textContent = this.currentUser.name;
+                });
+
+                const phoneElements = document.querySelectorAll('[data-user-phone]');
+                phoneElements.forEach(element => {
+                    element.textContent = this.currentUser.phone;
+                });
+
+                // Show authenticated content
+                const authElements = document.querySelectorAll('[data-auth="true"]');
+                authElements.forEach(element => {
+                    element.style.display = 'block';
+                });
+
+                const guestElements = document.querySelectorAll('[data-auth="false"]');
+                guestElements.forEach(element => {
+                    element.style.display = 'none';
+                });
+            }
+
+            async demoLogin() {
+                try {
+                    const response = await fetch(`${this.baseURL}/api/auth/login`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            phone: '01712345678',
+                            pin: '1234'
+                        })
+                    });
+
+                    if (response.ok) {
+                        const data = await response.json();
+                        localStorage.setItem('probaho_token', data.token);
+                        this.currentUser = data.user;
+                        this.isAuthenticated = true;
+                        this.updateUIForAuthenticatedUser();
+                        await this.loadDashboardData();
+                        this.showSuccess('Login successful! Welcome to Probaho.');
+                    } else {
+                        this.showError('Login failed. Please try again.');
+                    }
+                } catch (error) {
+                    this.showError('Login failed. Please check your connection.');
+                }
+            }
+
+            showLoginPrompt() {
+                this.showModal('Login Required', 'Please log in to access this feature.', [
+                    { text: 'Login', action: () => window.location.href = '/login.html', primary: true },
+                    { text: 'Cancel', action: () => this.closeModal() }
+                ]);
+            }
+
+            showComingSoon() {
+                this.showModal('Coming Soon', 'This feature is currently under development and will be available soon!', [
+                    { text: 'OK', action: () => this.closeModal(), primary: true }
+                ]);
+            }
+
+            showTransactionHistory() {
+                this.showModal('Transaction History', 'View your complete transaction history.', [
+                    { text: 'View All', action: () => { this.closeModal(); window.location.href = '/history.html'; }, primary: true },
+                    { text: 'Close', action: () => this.closeModal() }
+                ]);
+            }
+
+            showHelp() {
+                this.showModal('Help & Support', 'Need assistance? We\'re here to help!', [
+                    { text: 'Contact Support', action: () => { this.closeModal(); window.location.href = '/help.html'; }, primary: true },
+                    { text: 'Close', action: () => this.closeModal() }
+                ]);
+            }
+
+            showModal(title, message, buttons = []) {
+                const modal = document.createElement('div');
+                modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4';
+                modal.innerHTML = `
+                    <div class="bg-white rounded-2xl p-6 max-w-md w-full transform transition-all">
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">${title}</h3>
+                        <p class="text-gray-600 mb-6">${message}</p>
+                        <div class="flex space-x-3 justify-end">
+                            ${buttons.map(btn => `
+                                <button class="px-4 py-2 rounded-lg font-medium transition-colors ${btn.primary ? 'bg-primary-600 text-white hover:bg-primary-700' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}">
+                                    ${btn.text}
+                                </button>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+
+                // Add event listeners to buttons
+                buttons.forEach((btn, index) => {
+                    const button = modal.querySelectorAll('button')[index];
+                    button.addEventListener('click', btn.action);
+                });
+
+                document.body.appendChild(modal);
+                this.currentModal = modal;
+
+                // Animate in
+                setTimeout(() => {
+                    modal.querySelector('.bg-white').style.transform = 'scale(1)';
+                }, 10);
+            }
+
+            closeModal() {
+                if (this.currentModal) {
+                    this.currentModal.remove();
+                    this.currentModal = null;
+                }
+            }
+
+            showSuccess(message) {
+                this.showToast(message, 'success');
+            }
+
+            showError(message) {
+                this.showToast(message, 'error');
+            }
+
+            showToast(message, type = 'info') {
+                const toast = document.createElement('div');
+                toast.className = `fixed top-4 right-4 z-50 p-4 rounded-lg shadow-lg transform transition-all duration-300 ${
+                    type === 'success' ? 'bg-green-500 text-white' : 
+                    type === 'error' ? 'bg-red-500 text-white' : 
+                    'bg-blue-500 text-white'
+                }`;
+                toast.textContent = message;
+
+                document.body.appendChild(toast);
+
+                // Animate in
+                setTimeout(() => {
+                    toast.style.transform = 'translateX(0)';
+                }, 10);
+
+                // Auto remove
+                setTimeout(() => {
+                    toast.style.transform = 'translateX(100%)';
+                    setTimeout(() => toast.remove(), 300);
+                }, 3000);
+            }
+
+            setupAnimations() {
+                // Add intersection observer for scroll animations
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('animate-fade-in');
+                        }
+                    });
+                });
+
+                document.querySelectorAll('section').forEach(section => {
+                    observer.observe(section);
+                });
+            }
+        }
+
+        // Initialize app when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            window.probahoApp = new ProbahoApp();
         });
     </script>
 </body>
