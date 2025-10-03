@@ -12,12 +12,16 @@ function findAvailablePort(startPort = 3000) {
             server.close(() => resolve(port));
         });
         server.on('error', () => {
-            resolve(findAvailablePort(startPort + 1));
+            if (startPort < 65535) {
+                resolve(findAvailablePort(startPort + 1));
+            } else {
+                resolve(3000); // Fallback to default port
+            }
         });
     });
 }
 
-const PORT = process.env.PORT || 3000;
+const PORT = parseInt(process.env.PORT) || 3000;
 
 // MIME types
 const mimeTypes = {

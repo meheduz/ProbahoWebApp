@@ -77,26 +77,21 @@ if [ ! -f "index.html" ]; then
     exit 1
 fi
 
-# Kill any existing processes on port 3000
+# Check for existing processes on port 3000
 print_status "Checking for existing processes on port 3000..."
-if lsof -Pi :3000 -sTCP:LISTEN -t >/dev/null ; then
-    print_warning "Port 3000 is already in use. Attempting to free it..."
-    PID=$(lsof -Pi :3000 -sTCP:LISTEN -t)
-    kill -9 $PID 2>/dev/null || true
-    sleep 2
-fi
-
-# Find available port if 3000 is still occupied
-PORT=3000
-if lsof -Pi :$PORT -sTCP:LISTEN -t >/dev/null ; then
-    print_warning "Port $PORT is still in use. Finding alternative port..."
-    for port in 3001 3002 3003 3004 3005; do
-        if ! lsof -Pi :$port -sTCP:LISTEN -t >/dev/null ; then
-            PORT=$port
-            export NEXT_PUBLIC_BASE_URL="http://localhost:$PORT"
-            break
+if netstat -tlnp 2>/dev/null | grep -q ":3000 " || ss -tlnp 2>/dev/null | grep -q ":3000 "; then
+    print_warning "Port 3000 is already in use. Finding alternative port..."
+    PORT=3001
+    while netstat -tlnp 2>/dev/null | grep -q ":$PORT " || ss -tlnp 2>/dev/null | grep -q ":$PORT "; do
+        PORT=$((PORT + 1))
+        if [ $PORT -gt 3010 ]; then
+            print_error "Could not find available port. Please free up some ports."
+            exit 1
         fi
     done
+    export NEXT_PUBLIC_BASE_URL="http://localhost:$PORT"
+else
+    PORT=3000
 fi
 
 print_success "Using port $PORT"
