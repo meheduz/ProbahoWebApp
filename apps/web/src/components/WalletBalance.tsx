@@ -111,7 +111,7 @@ export default function WalletBalance() {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="card bg-gradient-to-br from-primary-600 to-secondary-600 text-white"
+        className="card bg-gradient-to-br from-primary-600 to-secondary-600 text-white dark:from-primary-700 dark:to-secondary-700"
       >
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center space-x-2">
@@ -164,21 +164,21 @@ export default function WalletBalance() {
       >
         <h3 className="font-semibold text-gray-900 mb-4">Today's Activity</h3>
         
-  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div className="text-center">
-            <div className="text-2xl font-bold text-green-600">
+            <div className="text-2xl font-bold text-green-600 dark:text-green-400">
               {formatCurrency(todayStats.received)}
             </div>
             <div className="text-sm text-gray-500">Received</div>
           </div>
           <div className="text-center">
-            <div className="text-2xl font-bold text-red-600">
+            <div className="text-2xl font-bold text-red-600 dark:text-red-400">
               {formatCurrency(todayStats.sent)}
             </div>
             <div className="text-sm text-gray-500">Sent</div>
           </div>
           <div className="text-center">
-            <div className="text-2xl font-bold text-primary-600">
+            <div className="text-2xl font-bold text-primary-600 dark:text-primary-400">
               {todayStats.transactions}
             </div>
             <div className="text-sm text-gray-500">Transactions</div>

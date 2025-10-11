@@ -68,7 +68,7 @@ export default function HomePage() {
         <Header />
         
         {/* Hero Section */}
-        <section className="relative overflow-hidden bg-gradient-to-br from-primary-600 via-primary-700 to-secondary-600 text-white">
+        <section className="relative overflow-hidden bg-gradient-to-br from-primary-600 via-primary-700 to-secondary-600 text-white dark:from-primary-700 dark:via-primary-800 dark:to-secondary-700">
           <div className="absolute inset-0">
             <div className="absolute inset-0 bg-gradient-to-r from-primary-800/20 to-secondary-800/20"></div>
             <div className="absolute inset-0 opacity-40">
@@ -163,7 +163,7 @@ export default function HomePage() {
         </section>
 
         {/* Wallet Dashboard */}
-        <section className="py-20 bg-gradient-to-br from-gray-50 via-white to-gray-100">
+        <section className="py-20 bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-gray-950 dark:via-gray-950 dark:to-gray-900">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -214,7 +214,7 @@ export default function HomePage() {
         </section>
 
         {/* Features Section */}
-        <section className="py-24 bg-gradient-to-br from-white via-gray-50 to-white">
+        <section className="py-24 bg-gradient-to-br from-white via-gray-50 to-white dark:from-gray-950 dark:via-gray-950 dark:to-gray-950">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -259,7 +259,7 @@ export default function HomePage() {
         </section>
 
         {/* Stats Section */}
-        <section className="py-24 bg-gradient-to-br from-primary-600 via-primary-700 to-secondary-600 text-white relative overflow-hidden">
+        <section className="py-24 bg-gradient-to-br from-primary-600 via-primary-700 to-secondary-600 text-white relative overflow-hidden dark:from-primary-700 dark:via-primary-800 dark:to-secondary-700">
           <div className="absolute inset-0">
             <div className="absolute inset-0 bg-gradient-to-r from-primary-800/20 to-secondary-800/20"></div>
             <div className="absolute inset-0 opacity-60">

@@ -93,7 +93,7 @@ export default function QuickActions({}: QuickActionsProps) {
   return (
     <div className="space-y-6">
       {/* Quick Actions Grid */}
-      <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-8">
+      <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 dark:bg-gray-900 dark:border-gray-800">
         <div className="flex items-center justify-between mb-8">
           <h3 className="text-xl font-bold text-gray-900">Quick Actions</h3>
           <div className="w-2 h-2 bg-primary-500 rounded-full animate-pulse"></div>
@@ -112,15 +112,15 @@ export default function QuickActions({}: QuickActionsProps) {
               >
                 {action.action === 'add' || action.action === 'send' ? (
                   <Link href={action.action === 'add' ? '/add-money' : '/send-money'} legacyBehavior>
-                    <a className="group block w-full p-6 bg-gradient-to-br from-gray-50 to-gray-100 hover:from-primary-50 hover:to-secondary-50 rounded-2xl border border-gray-200 hover:border-primary-200 transition-all duration-300 shadow-sm hover:shadow-lg">
+                    <a className="group block w-full p-6 bg-gradient-to-br from-gray-50 to-gray-100 hover:from-primary-50 hover:to-secondary-50 rounded-2xl border border-gray-200 hover:border-primary-200 transition-all duration-300 shadow-sm hover:shadow-lg dark:from-gray-800 dark:to-gray-850 dark:border-gray-700 dark:hover:border-primary-600">
                       <div className={`w-16 h-16 ${action.color} rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
                         <action.icon className="h-8 w-8 text-white" />
                       </div>
                       <div className="text-left">
-                        <h4 className="font-bold text-gray-900 text-base mb-2 group-hover:text-primary-600 transition-colors duration-200">
+                        <h4 className="font-bold text-gray-900 text-base mb-2 group-hover:text-primary-600 transition-colors duration-200 dark:text-gray-100">
                           {action.title}
                         </h4>
-                        <p className="text-sm text-gray-600 leading-relaxed group-hover:text-gray-700 transition-colors duration-200">
+                        <p className="text-sm text-gray-600 leading-relaxed group-hover:text-gray-700 transition-colors duration-200 dark:text-gray-400 dark:group-hover:text-gray-300">
                           {action.description}
                         </p>
                       </div>
@@ -129,16 +129,16 @@ export default function QuickActions({}: QuickActionsProps) {
                 ) : (
                   <button
                     onClick={() => handleAction(action.action)}
-                    className="group w-full text-left p-6 bg-gradient-to-br from-gray-50 to-gray-100 hover:from-primary-50 hover:to-secondary-50 rounded-2xl border border-gray-200 hover:border-primary-200 transition-all duration-300 shadow-sm hover:shadow-lg"
+                    className="group w-full text-left p-6 bg-gradient-to-br from-gray-50 to-gray-100 hover:from-primary-50 hover:to-secondary-50 rounded-2xl border border-gray-200 hover:border-primary-200 transition-all duration-300 shadow-sm hover:shadow-lg dark:from-gray-800 dark:to-gray-850 dark:border-gray-700 dark:hover:border-primary-600"
                   >
                     <div className={`w-16 h-16 ${action.color} rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
                       <action.icon className="h-8 w-8 text-white" />
                     </div>
                     <div className="text-left">
-                      <h4 className="font-bold text-gray-900 text-base mb-2 group-hover:text-primary-600 transition-colors duration-200">
+                      <h4 className="font-bold text-gray-900 text-base mb-2 group-hover:text-primary-600 transition-colors duration-200 dark:text-gray-100">
                         {action.title}
                       </h4>
-                      <p className="text-sm text-gray-600 leading-relaxed group-hover:text-gray-700 transition-colors duration-200">
+                      <p className="text-sm text-gray-600 leading-relaxed group-hover:text-gray-700 transition-colors duration-200 dark:text-gray-400 dark:group-hover:text-gray-300">
                         {action.description}
                       </p>
                     </div>
@@ -151,7 +151,7 @@ export default function QuickActions({}: QuickActionsProps) {
       </div>
 
       {/* Supported MFS Providers */}
-      <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-8">
+      <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 dark:bg-gray-900 dark:border-gray-800">
         <div className="flex items-center justify-between mb-6">
           <h3 className="text-xl font-bold text-gray-900">Supported MFS Providers</h3>
           <div className="flex items-center space-x-1">
@@ -168,7 +168,7 @@ export default function QuickActions({}: QuickActionsProps) {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: index * 0.05 }}
               whileHover={{ scale: 1.05 }}
-              className="group flex items-center space-x-4 p-4 bg-gradient-to-r from-gray-50 to-gray-100 rounded-xl hover:from-primary-50 hover:to-secondary-50 transition-all duration-300 border border-gray-200 hover:border-primary-200"
+              className="group flex items-center space-x-4 p-4 bg-gradient-to-r from-gray-50 to-gray-100 rounded-xl hover:from-primary-50 hover:to-secondary-50 transition-all duration-300 border border-gray-200 hover:border-primary-200 dark:from-gray-800 dark:to-gray-850 dark:border-gray-700 dark:hover:border-primary-600"
             >
               <div className={`w-12 h-12 ${getMFSProviderColor(provider)} rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300`}>
                 <span className="text-white text-sm font-bold">
@@ -176,7 +176,7 @@ export default function QuickActions({}: QuickActionsProps) {
                 </span>
               </div>
               <div>
-                <span className="font-bold text-gray-900 text-sm group-hover:text-primary-600 transition-colors duration-200">
+                <span className="font-bold text-gray-900 text-sm group-hover:text-primary-600 transition-colors duration-200 dark:text-gray-100">
                   {getMFSProviderName(provider)}
                 </span>
                 <div className="text-xs text-gray-500">Available</div>
@@ -187,7 +187,7 @@ export default function QuickActions({}: QuickActionsProps) {
       </div>
 
       {/* Transfer Benefits */}
-      <div className="bg-gradient-to-br from-green-50 via-blue-50 to-purple-50 rounded-2xl shadow-xl border border-green-200 p-8 relative overflow-hidden">
+      <div className="bg-gradient-to-br from-green-50 via-blue-50 to-purple-50 rounded-2xl shadow-xl border border-green-200 p-8 relative overflow-hidden dark:from-gray-800 dark:via-gray-800 dark:to-gray-800 dark:border-gray-700">
         <div className="absolute inset-0 bg-gradient-to-r from-green-100/20 to-blue-100/20"></div>
         <div className="relative">
           <div className="flex items-start space-x-6">
