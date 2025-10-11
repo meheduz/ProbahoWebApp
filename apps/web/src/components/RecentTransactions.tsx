@@ -129,14 +129,14 @@ export default function RecentTransactions() {
   return (
     <div className="card">
       <div className="flex items-center justify-between mb-6">
-        <h3 className="font-semibold text-gray-900">Recent Transactions</h3>
+        <h3 className="font-semibold text-gray-900 dark:text-gray-100">Recent Transactions</h3>
         <a href="/history" className="text-primary-600 text-sm hover:text-primary-700">
           View All
         </a>
       </div>
 
       {/* Filter Tabs */}
-      <div className="flex space-x-1 mb-6 bg-gray-100 p-1 rounded-lg">
+      <div className="flex space-x-1 mb-6 bg-gray-100 p-1 rounded-lg dark:bg-gray-800">
         {[
           { key: 'all', label: 'All' },
           { key: 'sent', label: 'Sent' },
@@ -147,8 +147,8 @@ export default function RecentTransactions() {
             onClick={() => setFilter(tab.key as any)}
             className={`px-4 py-2 text-sm font-medium rounded-md transition-colors duration-200 ${
               filter === tab.key
-                ? 'bg-white text-primary-600 shadow-sm'
-                : 'text-gray-600 hover:text-gray-900'
+                ? 'bg-white text-primary-600 shadow-sm dark:bg-gray-900 dark:text-primary-400'
+                : 'text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white'
             }`}
           >
             {tab.label}
@@ -170,7 +170,7 @@ export default function RecentTransactions() {
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: index * 0.05 }}
-              className="flex items-center space-x-4 p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-200"
+              className="flex items-center space-x-4 p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-200 dark:bg-gray-900 dark:hover:bg-gray-800"
             >
               {/* Transaction Icon */}
               <div className="flex-shrink-0">
@@ -190,7 +190,7 @@ export default function RecentTransactions() {
               {/* Transaction Details */}
               <div className="flex-1 min-w-0">
                 <div className="flex items-center space-x-2 mb-1">
-                  <p className="font-medium text-gray-900 truncate">
+                  <p className="font-medium text-gray-900 truncate dark:text-gray-100">
                     {transaction.description}
                   </p>
                   {getStatusIcon(transaction.status)}

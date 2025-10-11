@@ -88,10 +88,10 @@ export default function AddMoneyModal({ onClose }: AddMoneyModalProps) {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.9 }}
-          className="bg-white rounded-xl shadow-2xl max-w-md w-full max-h-[90vh] overflow-y-auto"
+          className="bg-white rounded-xl shadow-2xl max-w-md w-full max-h-[90vh] overflow-y-auto dark:bg-gray-900 dark:text-gray-100"
         >
           {/* Header */}
-          <div className="flex items-center justify-between p-6 border-b border-gray-200">
+          <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-800">
             <h2 className="text-xl font-semibold text-gray-900">
               {step === 'select' && 'Select MFS Provider'}
               {step === 'amount' && 'Enter Amount'}
@@ -124,7 +124,7 @@ export default function AddMoneyModal({ onClose }: AddMoneyModalProps) {
                     <button
                       key={provider}
                       onClick={() => handleMfsSelect(provider)}
-                      className="flex items-center space-x-3 p-4 border border-gray-200 rounded-lg hover:border-primary-300 hover:bg-primary-50 transition-all duration-200"
+                      className="flex items-center space-x-3 p-4 border border-gray-200 rounded-lg hover:border-primary-300 hover:bg-primary-50 transition-all duration-200 dark:border-gray-700 dark:hover:border-primary-600 dark:hover:bg-gray-800"
                     >
                       <div className={`w-10 h-10 ${getMFSProviderColor(provider)} rounded-lg flex items-center justify-center`}>
                         <span className="text-white font-bold text-sm">
@@ -147,7 +147,7 @@ export default function AddMoneyModal({ onClose }: AddMoneyModalProps) {
                 animate={{ opacity: 1, x: 0 }}
                 className="space-y-6"
               >
-                <div className="flex items-center space-x-3 p-4 bg-gray-50 rounded-lg">
+                <div className="flex items-center space-x-3 p-4 bg-gray-50 rounded-lg dark:bg-gray-800">
                   <div className={`w-10 h-10 ${getMFSProviderColor(selectedMfs)} rounded-lg flex items-center justify-center`}>
                     <span className="text-white font-bold text-sm">
                       {getMFSProviderName(selectedMfs).charAt(0)}
@@ -197,7 +197,7 @@ export default function AddMoneyModal({ onClose }: AddMoneyModalProps) {
                   )}
                 </div>
 
-                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 dark:bg-blue-950/30 dark:border-blue-900">
                   <div className="flex items-start space-x-2">
                     <InformationCircleIcon className="h-5 w-5 text-blue-600 mt-0.5" />
                     <div className="text-sm text-blue-800">
@@ -252,7 +252,7 @@ export default function AddMoneyModal({ onClose }: AddMoneyModalProps) {
                   </p>
                 </div>
 
-                <div className="bg-gray-50 rounded-lg p-4">
+                <div className="bg-gray-50 rounded-lg p-4 dark:bg-gray-800">
                   <div className="flex justify-between items-center mb-2">
                     <span className="text-gray-600">Amount</span>
                     <span className="font-semibold">{formatCurrency(Number(amount))}</span>
