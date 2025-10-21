@@ -1,189 +1,60 @@
 # Probaho - Digital Wallet with MFS Integration
 
-Probaho is a modern digital wallet application that integrates with popular Mobile Financial Services (MFS) in Bangladesh. It provides a seamless platform for managing digital transactions, including money transfers and payments through various MFS providers.
+**Tagline:** Your Money, Your Control
+
+Probaho is a digital wallet prototype that explores unified access to Bangladesh's Mobile Financial Services (MFS) ecosystem. This demonstration project showcases how multiple MFS providers could be integrated into a single platform for simplified transactions.
+
+---
+
+## Overview
+
+This is a **prototype/demonstration project** that explores the concept of a unified digital wallet for Bangladesh's MFS ecosystem. It demonstrates technical feasibility and user experience design for cross-platform MFS integration.
+
+### The Concept
+
+- **Problem**: Multiple MFS providers (bKash, Rocket, Nagad, Upay) operate independently without direct interoperability
+- **Solution**: A unified interface that could facilitate transactions across different MFS platforms
+- **Status**: Prototype/demonstration - not a production financial service
+
+---
 
 ## Features
 
-### 💳 Digital Wallet Management
+### Digital Wallet Management
 - Real-time wallet balance tracking
 - Transaction history with detailed logs
 - Secure PIN-based authentication
 - Multi-currency support (focused on BDT)
 
-### 🔄 MFS Integration
-- Support for major MFS providers:
+### MFS Integration (Concept)
+- Demonstration of integration patterns for:
   - bKash
   - Nagad
   - Rocket
   - Upay
 
-### 💸 Money Transfer Features
-- Send money to other Probaho users
-- Add money from MFS accounts
-- Real-time transaction status
+### Money Transfer Features
+- Send money interface (demo)
+- Add money from MFS accounts (demo)
+- Transaction status tracking
 - Transaction fee calculation
-- Daily transaction limits
+- Daily transaction limit enforcement
 
-### 🔒 Security Features
+### Security Features
 - PIN-protected transactions
-- OTP verification for sensitive operations
+- OTP verification flow
 - Session management
-- Transaction monitoring
+- Transaction monitoring interface
 
-## Tech Stack
-
-### Frontend (Web)
-- Next.js 14
-- TypeScript
-- Tailwind CSS
-- Framer Motion
-- React Query
-
-### Mobile App
-- React Native
-- TypeScript
-- Native Base
-
-### Shared Infrastructure
-- Turborepo for monorepo management
-- TypeScript for type safety
-- Shared component library
-- Consistent styling system
-
-## Project Structure
-
-```
-probaho/
-├── apps/
-│   ├── web/               # Next.js web application
-│   │   ├── src/
-│   │   │   ├── app/      # App router pages
-│   │   │   ├── components/
-│   │   │   ├── contexts/
-│   │   │   └── lib/
-│   │   └── public/
-│   └── mobile/           # React Native mobile app
-│       ├── src/
-│       ├── screens/
-│       └── components/
-└── packages/
-    └── shared/           # Shared utilities and types
-```
-
-## Getting Started
-
-### Prerequisites
-- Node.js 18 or higher
-- npm or yarn
-- Git
-
-### Installation
-
-1. Clone the repository:
-\`\`\`bash
-git clone https://github.com/meheduz/ProbahoWebApp.git
-cd ProbahoWebApp
-\`\`\`
-
-2. Install dependencies:
-\`\`\`bash
-npm install
-\`\`\`
-
-3. Start the development server:
-\`\`\`bash
-# For web application
-cd apps/web
-npm run dev
-
-# For mobile application
-cd apps/mobile
-npm run start
-\`\`\`
-
-### Environment Variables
-
-Create a \`.env.local\` file in the web application directory:
-
-\`\`\`env
-NEXT_PUBLIC_BASE_PATH=/ProbahoWebApp
-\`\`\`
-
-## Transaction Limits
-
-### Add Money Limits
-- bKash: ৳50,000 per transaction, ৳100,000 daily
-- Nagad: ৳40,000 per transaction, ৳80,000 daily
-- Rocket: ৳30,000 per transaction, ৳60,000 daily
-- Upay: ৳25,000 per transaction, ৳50,000 daily
-
-### Send Money
-- Minimum: ৳10
-- Maximum: ৳100,000 per transaction
-- Fee: Fixed ৳20 per transaction
-
-## Development
-
-### Web Application
-The web application is built with Next.js and follows modern React patterns:
-- App Router for routing
-- Server Components where applicable
-- Client Components for interactive features
-- Tailwind CSS for styling
-- TypeScript for type safety
-
-### Mobile Application
-The mobile app is built with React Native and includes:
-- Native navigation
-- Offline support
-- Biometric authentication
-- Push notifications
-
-## Contributing
-
-1. Fork the repository
-2. Create your feature branch (\`git checkout -b feature/AmazingFeature\`)
-3. Commit your changes (\`git commit -m 'Add some AmazingFeature'\`)
-4. Push to the branch (\`git push origin feature/AmazingFeature\`)
-5. Open a Pull Request
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Acknowledgments
-
-- Built with modern web technologies
-- Designed for Bangladesh's digital payment ecosystem
-- Focus on user security and convenience
-
-## Contact
-
-Project Link: [https://github.com/meheduz/ProbahoWebApp](https://github.com/meheduz/ProbahoWebApp)
+### User Experience
+- Modern, responsive design
+- Dark/light theme support
+- Multi-language support (English/বাংলা)
+- Intuitive navigation
 
 ---
 
-Made with ❤️ for Bangladesh's digital payment ecosystem
-
-**Tagline:** Your Money, Your Control
-
-Probaho is a revolutionary fintech solution that unifies Bangladesh's fragmented mobile financial services (MFS) ecosystem. By consolidating multiple MFS providers into a single platform, Probaho enables seamless cross-MFS transfers while dramatically reducing costs and time.
-
-## 🚀 The Problem
-
-- **Fragmented MFS ecosystem**: Bangladesh has over 130M registered MFS accounts across bKash, Rocket, Nagad, etc.
-- **Cross-platform barrier**: Users cannot directly transfer between MFS — they must cash out/in, wasting 30–60 minutes and paying 6–12% fees
-- **User frustration**: 84.7% of surveyed users face problems sending money when the recipient uses another MFS
-
-## 💡 The Solution
-
-Probaho provides a unified wallet that:
-- Consolidates balances from any MFS or bank using official APIs
-- Enables instant transfer to any recipient, regardless of their MFS
-- Cuts transfer cost to ~1.5%, saving billions annually
-- Keeps all funds safe under partner bank custody (regulated by Bangladesh Bank)
-
-## 🏗️ Architecture
+## Architecture
 
 This project uses a monorepo structure with shared code between web and mobile applications:
 
@@ -191,44 +62,82 @@ This project uses a monorepo structure with shared code between web and mobile a
 probaho/
 ├── apps/
 │   ├── web/              # Next.js web application
+│   │   ├── src/
+│   │   │   ├── app/      # App router pages
+│   │   │   ├── components/
+│   │   │   ├── contexts/
+│   │   │   ├── services/
+│   │   │   └── lib/
+│   │   └── public/
 │   └── mobile/           # React Native mobile app
-├── packages/
-│   └── shared/           # Shared types, utilities, and business logic
-└── docs/                 # Documentation
+│       ├── src/
+│       │   ├── screens/
+│       │   ├── components/
+│       │   ├── contexts/
+│       │   ├── services/
+│       │   ├── theme/
+│       │   └── navigation/
+│       └── assets/
+└── packages/
+    └── shared/           # Shared utilities and types
+        ├── types/
+        ├── utils/
+        ├── schemas/
+        └── constants/
 ```
 
-### Tech Stack
+---
 
-**Frontend:**
-- **Web**: Next.js 14, React 18, TypeScript, Tailwind CSS
-- **Mobile**: React Native, Expo, TypeScript
-- **Shared**: Zod for validation, common utilities
+## Tech Stack
 
-**Backend** (to be implemented):
-- Node.js, Express/Fastify
+### Frontend
+**Web:**
+- Next.js 14
+- React 18
+- TypeScript
+- Tailwind CSS
+- Framer Motion
+- React Query
+
+**Mobile:**
+- React Native
+- Expo
+- TypeScript
+- Native Base
+
+**Shared:**
+- Turborepo for monorepo management
+- Zod for validation
+- Shared component library
+
+### Backend (Planned)
+- Node.js with Express/Fastify
 - PostgreSQL with Prisma ORM
 - Redis for caching and sessions
 - JWT authentication
 
-**Infrastructure:**
+### Infrastructure
 - Docker containerization
-- AWS/GCP cloud deployment
 - CI/CD with GitHub Actions
+- Cloud deployment ready (AWS/GCP/Azure)
 
-## 🚀 Getting Started
+---
+
+## Getting Started
 
 ### Prerequisites
 
-- Node.js 18+ 
+- Node.js 18 or higher
 - npm or yarn
+- Git
 - For mobile development: Expo CLI
 
 ### Installation
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/your-org/probaho.git
-   cd probaho
+   git clone https://github.com/meheduz/ProbahoWebApp.git
+   cd ProbahoWebApp
    ```
 
 2. **Install dependencies**
@@ -238,8 +147,14 @@ probaho/
 
 3. **Set up environment variables**
    ```bash
-   cp env.example .env.local
-   # Edit .env.local with your actual values
+   # Create .env.local file in apps/web directory
+   cp .env.example .env.local
+   ```
+
+   Example `.env.local`:
+   ```env
+   NEXT_PUBLIC_BASE_PATH=/ProbahoWebApp
+   NEXT_PUBLIC_API_URL=http://localhost:3001
    ```
 
 4. **Build shared packages**
@@ -249,82 +164,49 @@ probaho/
 
 ### Running the Applications
 
-**Web App:**
+**Web Application:**
 ```bash
 cd apps/web
 npm run dev
 ```
-Open [http://localhost:3000](http://localhost:3000)
+Open [http://localhost:3000](http://localhost:3000) in your browser
 
-**Mobile App:**
+**Mobile Application:**
 ```bash
 cd apps/mobile
 npm start
 ```
-Use Expo Go app to scan the QR code
+Scan the QR code with Expo Go app on your mobile device
 
-**All apps simultaneously:**
+**Run all apps simultaneously:**
 ```bash
 npm run dev
 ```
 
-## 📱 Features
+---
 
-### Core Features
-- [x] Unified wallet dashboard
-- [x] Cross-MFS money transfers
-- [x] Add money from any MFS
-- [x] Transaction history
-- [x] Real-time balance updates
-- [x] Secure PIN authentication
-- [x] OTP verification
+## Transaction Specifications (Demo)
 
-### Security Features
-- [x] Bank-grade encryption
-- [x] Biometric authentication (mobile)
-- [x] Secure token management
-- [x] Transaction monitoring
-- [x] Fraud detection
+*Note: These are demonstration specifications for the prototype interface*
 
-### User Experience
-- [x] Modern, responsive design
-- [x] Dark/light theme support
-- [x] Multi-language support (EN/BN)
-- [x] Offline capability
-- [x] Push notifications
+### Add Money Limits (Proposed)
 
-## 🔧 Development
+| MFS Provider | Per Transaction | Daily Limit |
+|--------------|----------------|-------------|
+| **bKash**    | ৳50,000       | ৳100,000    |
+| **Nagad**    | ৳40,000       | ৳80,000     |
+| **Rocket**   | ৳30,000       | ৳60,000     |
+| **Upay**     | ৳25,000       | ৳50,000     |
 
-### Project Structure
+### Send Money
 
-```
-apps/web/
-├── src/
-│   ├── app/              # Next.js app router
-│   ├── components/       # React components
-│   ├── contexts/         # React contexts
-│   ├── services/         # API services
-│   └── lib/              # Web-specific utilities
-└── public/               # Static assets
+- **Minimum**: ৳10 per transaction
+- **Maximum**: ৳100,000 per transaction
+- **Fee**: Fixed ৳20 per transaction (demonstration pricing)
 
-apps/mobile/
-├── src/
-│   ├── screens/          # React Native screens
-│   ├── components/       # Shared mobile components
-│   ├── contexts/         # React contexts
-│   ├── services/         # API services
-│   ├── theme/            # Theme configuration
-│   └── navigation/       # Navigation setup
-└── assets/               # Mobile assets
+---
 
-packages/shared/
-├── src/
-│   ├── types/            # TypeScript types
-│   ├── utils/            # Common utilities
-│   ├── schemas/          # Zod validation schemas
-│   └── constants/        # App constants
-└── dist/                 # Built package
-```
+## Development
 
 ### Available Scripts
 
@@ -334,100 +216,245 @@ npm run dev              # Start all apps in development mode
 npm run build            # Build all packages
 npm run lint             # Lint all packages
 npm run test             # Run tests across all packages
+npm run type-check       # TypeScript type checking
 
 # Individual apps
 npm run dev:web          # Start web app only
 npm run dev:mobile       # Start mobile app only
 npm run build:shared     # Build shared package
+npm run clean            # Clean all build artifacts
 ```
 
-### Code Style
+### Code Style & Standards
 
-This project uses:
+This project follows:
 - **ESLint** for code linting
 - **Prettier** for code formatting
 - **TypeScript** for type safety
 - **Conventional Commits** for commit messages
 
-## 🔐 Security
-
-Probaho implements multiple layers of security:
-
-1. **Authentication**
-   - PIN-based authentication
-   - OTP verification
-   - JWT tokens with refresh mechanism
-   - Biometric authentication (mobile)
-
-2. **Data Protection**
-   - End-to-end encryption
-   - Secure key management
-   - PCI DSS compliance
-   - GDPR compliance
-
-3. **Transaction Security**
-   - Multi-factor authentication
-   - Real-time fraud detection
-   - Transaction limits
-   - Audit trails
-
-## 🚀 Deployment
-
-### Web Application
-- **Production**: Vercel/Netlify
-- **Staging**: AWS S3 + CloudFront
-- **Development**: Local development server
-
-### Mobile Application
-- **iOS**: App Store via Expo Application Services (EAS)
-- **Android**: Google Play Store via EAS
-- **Development**: Expo Go app
-
-### Backend Services
-- **API**: AWS Lambda/Google Cloud Functions
-- **Database**: AWS RDS/Google Cloud SQL
-- **Cache**: AWS ElastiCache/Google Cloud Memorystore
-
-## 📊 Business Model
-
-### Revenue Streams
-1. **Transaction Fees**: 1.5% per transaction (vs 6-12% current)
-2. **Premium Features**: Advanced analytics, priority support
-3. **API Licensing**: White-label solutions for banks
-4. **Data Insights**: Anonymized market insights
-
-### Market Opportunity
-- **Total Addressable Market**: 130M+ MFS users in Bangladesh
-- **Serviceable Market**: 50M+ active users
-- **Initial Target**: 1M users in first year
-
-## 🤝 Contributing
-
-We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
-
-### Development Workflow
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests
-5. Submit a pull request
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 📞 Support
-
-- **Email**: support@probaho.app
-- **Website**: https://probaho.app
-- **Documentation**: https://docs.probaho.app
-
-## 🙏 Acknowledgments
-
-- Bangladesh Bank for regulatory guidance
-- MFS providers (bKash, Rocket, Nagad) for API access
-- Open source community for excellent tools and libraries
+Example commit:
+```bash
+git commit -m "feat(wallet): add transaction history filter"
+git commit -m "fix(auth): resolve PIN validation issue"
+git commit -m "docs(readme): update installation steps"
+```
 
 ---
 
-**Probaho** - Unifying Bangladesh's financial future, one transaction at a time.
+## Security Implementation
+
+This prototype demonstrates security best practices:
+
+### Authentication & Authorization
+- 4-digit PIN authentication
+- OTP verification via SMS (simulated)
+- JWT tokens with refresh mechanism
+- Session management with timeout
+
+### Data Protection
+- HTTPS/TLS for API communications
+- Secure password hashing (bcrypt)
+- Environment variable protection
+- Secure credential storage
+
+### Transaction Security
+- PIN verification for transactions
+- OTP verification for sensitive operations
+- Transaction limits enforcement
+- Audit trail logging
+
+### API Security
+- Rate limiting
+- Request validation
+- CORS policies
+- Input sanitization
+
+---
+
+## Testing
+
+```bash
+# Run all tests
+npm run test
+
+# Run tests with coverage
+npm run test:coverage
+
+# Run specific test file
+npm run test -- wallet.test.ts
+
+# Watch mode
+npm run test:watch
+```
+
+---
+
+## Deployment
+
+### Web Application
+
+**Development**: Local development server  
+**Production Build**:
+```bash
+cd apps/web
+npm run build
+npm run start
+```
+
+**Hosting Options**: Vercel, Netlify, or custom Node.js hosting
+
+### Mobile Application
+
+**Development**: Expo Go app  
+**Production Build**:
+```bash
+# Install EAS CLI
+npm install -g eas-cli
+
+# Configure EAS
+eas build:configure
+
+# Build for iOS
+eas build --platform ios
+
+# Build for Android
+eas build --platform android
+```
+
+---
+
+## Contributing
+
+Contributions are welcome! This project is open for improvements and feature additions.
+
+### Development Workflow
+
+1. Fork the repository
+2. Create a feature branch
+   ```bash
+   git checkout -b feature/your-feature-name
+   ```
+3. Make your changes
+   - Follow the code style guidelines
+   - Add tests if applicable
+   - Update documentation
+4. Commit your changes
+   ```bash
+   git commit -m "feat: add your feature"
+   ```
+5. Push to your fork
+   ```bash
+   git push origin feature/your-feature-name
+   ```
+6. Open a Pull Request
+
+### Contribution Guidelines
+
+- Write clear, descriptive commit messages
+- Follow TypeScript best practices
+- Maintain consistent code formatting
+- Update tests and documentation
+- Be respectful in discussions
+
+---
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+## Contact & Support
+
+- **Project Repository**: [GitHub - meheduz/ProbahoWebApp](https://github.com/meheduz/ProbahoWebApp)
+- **Issues & Suggestions**: [GitHub Issues](https://github.com/meheduz/ProbahoWebApp/issues)
+- **Developer**: [@meheduz](https://github.com/meheduz)
+
+---
+
+## Acknowledgments
+
+- Open source community for excellent tools and libraries
+- MFS providers for inspiration in building better financial services
+- All contributors who help improve this project
+
+---
+
+## Important Disclaimer
+
+**This is a demonstration/prototype project created for educational and portfolio purposes.**
+
+### What This Project IS:
+- A technical demonstration of unified MFS wallet concepts  
+- A showcase of modern web and mobile development practices  
+- An exploration of user experience design for fintech  
+- Open source and available for learning  
+
+### What This Project IS NOT:
+- A production-ready financial service  
+- Licensed or authorized by any regulatory body  
+- Connected to real MFS provider APIs  
+- Handling actual financial transactions  
+- Endorsed by any MFS provider or financial institution  
+
+### For Production Implementation:
+
+Any real-world implementation of this concept would require:
+
+1. **Regulatory Compliance**
+   - Bangladesh Bank licensing and approval
+   - Financial service regulations compliance
+   - Anti-money laundering (AML) compliance
+   - Know Your Customer (KYC) procedures
+
+2. **Official Partnerships**
+   - Formal agreements with MFS providers
+   - API access and integration permissions
+   - Legal contracts and SLAs
+   - Technical support arrangements
+
+3. **Security & Infrastructure**
+   - Professional security audit
+   - PCI DSS compliance certification
+   - Penetration testing
+   - Production-grade infrastructure
+   - 24/7 monitoring and support
+
+4. **Legal & Financial**
+   - Financial backing and capital
+   - Insurance coverage
+   - Legal team and compliance officers
+   - Customer support infrastructure
+
+---
+
+## Development Roadmap
+
+### Current Phase - Prototype
+- [x] Core wallet interface design
+- [x] MFS integration concept demonstration
+- [x] Web application (Next.js)
+- [x] Mobile application (React Native)
+- [x] Basic security patterns
+- [ ] Backend API implementation
+- [ ] Database integration
+- [ ] Comprehensive testing
+
+### Future Enhancements
+- [ ] Advanced transaction filtering
+- [ ] Export transaction history
+- [ ] Multiple wallet support
+- [ ] Recurring payments interface
+- [ ] Budget tracking features
+- [ ] Enhanced analytics dashboard
+
+*This roadmap represents the technical development vision for the prototype. It does not imply plans for production deployment.*
+
+---
+
+**Probaho** - A prototype exploring unified digital wallet concepts for Bangladesh.
+
+Made with care as a demonstration project
+
+*Last updated: October 2024*
