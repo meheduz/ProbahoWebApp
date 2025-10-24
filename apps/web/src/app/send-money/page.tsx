@@ -17,7 +17,7 @@ import {
 } from '@heroicons/react/24/outline'
 import MFSLogo from '@/components/MFSLogo'
 import { MFSProvider } from '@/types'
-import { getMFSProviderName, getMFSProviderColor, formatCurrency, validateAmount, validatePhoneNumber } from '@/lib/utils'
+import { getMFSProviderName, getMFSProviderColor, formatCurrency, validateAmount, validatePhoneNumber, calculateTransferFee } from '@/lib/utils'
 import { storage } from '@/lib/storage'
 
 const mfsProviders: MFSProvider[] = ['bkash', 'rocket', 'nagad', 'upay', 'tapp', 'mycash']
@@ -203,10 +203,7 @@ export default function SendMoneyPage() {
 
   const calculateFee = () => {
     const amountNum = Number(amount)
-    // Calculate 2% of the amount
-    const fee = Math.ceil(amountNum * 0.02)
-    // Return the calculated fee
-    return fee
+    return calculateTransferFee(amountNum)
   }
 
   const getTotalAmount = () => {

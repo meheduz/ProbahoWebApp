@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { XMarkIcon, InformationCircleIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 import { SendMoneyRequest, MFSProvider } from '@/types'
-import { formatCurrency, validateAmount, validatePhoneNumber, getMFSProviderName, getMFSProviderColor } from '@/lib/utils'
+import { formatCurrency, validateAmount, validatePhoneNumber, getMFSProviderName, getMFSProviderColor, calculateTransferFee } from '@/lib/utils'
 
 interface SendMoneyModalProps {
   onClose: () => void
@@ -97,8 +97,7 @@ export default function SendMoneyModal({ onClose }: SendMoneyModalProps) {
 
   const calculateFee = () => {
     const amountNum = Number(amount)
-    // 1.5% fee with minimum 5 BDT
-    return Math.max(5, amountNum * 0.015)
+    return calculateTransferFee(amountNum)
   }
 
   const getTotalAmount = () => {

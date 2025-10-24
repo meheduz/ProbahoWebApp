@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { XMarkIcon, InformationCircleIcon } from '@heroicons/react/24/outline'
 import { AddMoneyRequest, MFSProvider } from '@/types'
-import { formatCurrency, validateAmount, validatePhoneNumber, getMFSProviderName, getMFSProviderColor } from '@/lib/utils'
+import { formatCurrency, validateAmount, validatePhoneNumber, getMFSProviderName, getMFSProviderColor, calculateAddMoneyFee } from '@/lib/utils'
 
 interface AddMoneyModalProps {
   onClose: () => void
@@ -71,10 +71,7 @@ export default function AddMoneyModal({ onClose }: AddMoneyModalProps) {
 
   const calculateFee = () => {
     const amountNum = Number(amount)
-    if (amountNum <= 1000) return 5
-    if (amountNum <= 5000) return 10
-    if (amountNum <= 10000) return 15
-    return 20
+    return calculateAddMoneyFee(amountNum)
   }
 
   const getTotalAmount = () => {

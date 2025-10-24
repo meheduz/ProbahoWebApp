@@ -90,18 +90,71 @@ class StorageManager {
     this.subscribers[key]?.forEach(callback => callback(data))
   }
 
+  // Validation helpers
+  private validateWallet(data: any): data is Wallet {
+    return data && 
+           typeof data.id === 'string' &&
+           typeof data.userId === 'string' &&
+           typeof data.balance === 'number' &&
+           typeof data.currency === 'string' &&
+           typeof data.isActive === 'boolean' &&
+           typeof data.createdAt === 'string' &&
+           typeof data.updatedAt === 'string'
+  }
+
+  private validateTransaction(data: any): data is Transaction {
+    return data &&
+           typeof data.id === 'string' &&
+           typeof data.userId === 'string' &&
+           ['credit', 'debit'].includes(data.type) &&
+           typeof data.amount === 'number' &&
+           typeof data.currency === 'string' &&
+           ['pending', 'success', 'failed'].includes(data.status) &&
+           typeof data.description === 'string' &&
+           typeof data.createdAt === 'string' &&
+           typeof data.updatedAt === 'string'
+  }
+
   // Wallet Management
   getWallet(): Wallet | null {
     if (!this.isClient) return null;
-    const data = localStorage.getItem(STORAGE_KEYS.wallet)
-    return data ? JSON.parse(data) : null
+    
+    try {
+      const data = localStorage.getItem(STORAGE_KEYS.wallet)
+      if (!data) return null;
+      
+      const parsed = JSON.parse(data)
+      if (this.validateWallet(parsed)) {
+        return parsed
+      } else {
+        console.warn('Invalid wallet data in localStorage, resetting...')
+        this.clearWallet()
+        return null
+      }
+    } catch (error) {
+      console.error('Error parsing wallet data:', error)
+      this.clearWallet()
+      return null
+    }
   }
 
   setWallet(wallet: Wallet) {
     if (!this.isClient) return;
-    localStorage.setItem(STORAGE_KEYS.wallet, JSON.stringify(wallet))
-    this.notify('wallet', wallet)
-    window.dispatchEvent(new CustomEvent('walletUpdated', { detail: wallet }))
+    
+    if (!this.validateWallet(wallet)) {
+      console.error('Invalid wallet data provided')
+      return
+    }
+    
+    try {
+      localStorage.setItem(STORAGE_KEYS.wallet, JSON.stringify(wallet))
+      this.notify('wallet', wallet)
+      window.dispatchEvent(new CustomEvent('walletUpdated', { detail: wallet }))
+    } catch (error) {
+      console.error('Error saving wallet data:', error)
+      // Try to clear corrupted data
+      this.clearWallet()
+    }
   }
 
   updateWalletBalance(amount: number, type: 'credit' | 'debit' = 'credit') {
@@ -125,11 +178,49 @@ class StorageManager {
 
   // Transaction Management
   getTransactions(): Transaction[] {
-    const data = localStorage.getItem(STORAGE_KEYS.transactions)
-    return data ? JSON.parse(data) : []
+    if (!this.isClient) return [];
+    
+    try {
+      const data = localStorage.getItem(STORAGE_KEYS.transactions)
+      if (!data) return [];
+      
+      const parsed = JSON.parse(data)
+      if (Array.isArray(parsed)) {
+        // Filter out invalid transactions
+        const validTransactions = parsed.filter(tx => this.validateTransaction(tx))
+        
+        // If we filtered out any transactions, save the cleaned data
+        if (validTransactions.length !== parsed.length) {
+          console.warn(`Filtered out ${parsed.length - validTransactions.length} invalid transactions`)
+          this.setTransactions(validTransactions)
+        }
+        
+        return validTransactions
+      } else {
+        console.warn('Invalid transactions data in localStorage, resetting...')
+        this.clearTransactions()
+        return []
+      }
+    } catch (error) {
+      console.error('Error parsing transactions data:', error)
+      this.clearTransactions()
+      return []
+    }
   }
 
   addTransaction(transaction: Omit<Transaction, 'id' | 'createdAt' | 'updatedAt'>) {
+    if (!this.isClient) return null;
+    
+    // Validate transaction data
+    if (!transaction || 
+        typeof transaction.amount !== 'number' || 
+        transaction.amount <= 0 ||
+        !['credit', 'debit'].includes(transaction.type) ||
+        !['pending', 'success', 'failed'].includes(transaction.status)) {
+      console.error('Invalid transaction data provided')
+      return null
+    }
+    
     const transactions = this.getTransactions()
     const newTransaction = {
       ...transaction,
@@ -139,15 +230,21 @@ class StorageManager {
     }
 
     const updatedTransactions = [newTransaction, ...transactions]
-    localStorage.setItem(STORAGE_KEYS.transactions, JSON.stringify(updatedTransactions))
-    this.notify('transactions', updatedTransactions)
+    
+    try {
+      localStorage.setItem(STORAGE_KEYS.transactions, JSON.stringify(updatedTransactions))
+      this.notify('transactions', updatedTransactions)
 
-    // Update wallet balance
-    if (newTransaction.status === 'success') {
-      this.updateWalletBalance(newTransaction.amount, newTransaction.type)
+      // Update wallet balance
+      if (newTransaction.status === 'success') {
+        this.updateWalletBalance(newTransaction.amount, newTransaction.type)
+      }
+
+      return newTransaction
+    } catch (error) {
+      console.error('Error saving transaction:', error)
+      return null
     }
-
-    return newTransaction
   }
 
   // Get daily stats
@@ -170,10 +267,46 @@ class StorageManager {
     }
   }
 
+  // Helper methods for clearing corrupted data
+  private clearWallet() {
+    if (!this.isClient) return;
+    try {
+      localStorage.removeItem(STORAGE_KEYS.wallet)
+      this.notify('wallet', null)
+    } catch (error) {
+      console.error('Error clearing wallet data:', error)
+    }
+  }
+
+  private clearTransactions() {
+    if (!this.isClient) return;
+    try {
+      localStorage.removeItem(STORAGE_KEYS.transactions)
+      this.notify('transactions', [])
+    } catch (error) {
+      console.error('Error clearing transactions data:', error)
+    }
+  }
+
+  private setTransactions(transactions: Transaction[]) {
+    if (!this.isClient) return;
+    try {
+      localStorage.setItem(STORAGE_KEYS.transactions, JSON.stringify(transactions))
+      this.notify('transactions', transactions)
+    } catch (error) {
+      console.error('Error saving transactions data:', error)
+    }
+  }
+
   // Clear all data
   clearAllData() {
-    Object.values(STORAGE_KEYS).forEach(key => localStorage.removeItem(key))
-    window.dispatchEvent(new Event('storage'))
+    if (!this.isClient) return;
+    try {
+      Object.values(STORAGE_KEYS).forEach(key => localStorage.removeItem(key))
+      window.dispatchEvent(new Event('storage'))
+    } catch (error) {
+      console.error('Error clearing all data:', error)
+    }
   }
 }
 
