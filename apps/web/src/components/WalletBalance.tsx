@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
+import Link from 'next/link'
 import { 
   WalletIcon, 
   EyeIcon, 
@@ -111,26 +112,30 @@ export default function WalletBalance() {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="card bg-gradient-to-br from-primary-600 to-secondary-600 text-white dark:from-primary-700 dark:to-secondary-700"
+        className="relative overflow-hidden bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500 text-white rounded-3xl p-8 shadow-2xl hover:shadow-pink-500/25 transition-all duration-300"
       >
-        <div className="flex items-center justify-between mb-6">
-          <div className="flex items-center space-x-2">
-            <WalletIcon className="h-6 w-6" />
-            <span className="font-medium">Probaho Balance</span>
+        <div className="absolute inset-0 bg-black/10"></div>
+        <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-16 translate-x-16 animate-pulse"></div>
+        <div className="absolute bottom-0 left-0 w-24 h-24 bg-cyan-400/20 rounded-full -translate-y-8 -translate-x-8 animate-pulse"></div>
+        <div className="relative z-10">
+          <div className="flex items-center justify-between mb-6">
+            <div className="flex items-center space-x-2">
+              <WalletIcon className="h-6 w-6" />
+              <span className="font-medium">Probaho Balance</span>
+            </div>
+            <button
+              onClick={() => setIsBalanceVisible(!isBalanceVisible)}
+              className="p-2 hover:bg-white/20 rounded-full transition-colors duration-200"
+            >
+              {isBalanceVisible ? (
+                <EyeSlashIcon className="h-5 w-5" />
+              ) : (
+                <EyeIcon className="h-5 w-5" />
+              )}
+            </button>
           </div>
-          <button
-            onClick={() => setIsBalanceVisible(!isBalanceVisible)}
-            className="p-1 hover:bg-white/20 rounded-full transition-colors duration-200"
-          >
-            {isBalanceVisible ? (
-              <EyeSlashIcon className="h-5 w-5" />
-            ) : (
-              <EyeIcon className="h-5 w-5" />
-            )}
-          </button>
-        </div>
 
-        <div className="mb-6">
+          <div className="mb-6">
           <div className="text-3xl font-bold mb-1">
             {isBalanceVisible ? formatCurrency(wallet.balance) : '••••••'}
           </div>
@@ -153,6 +158,7 @@ export default function WalletBalance() {
             </span>
           </div>
         </div>
+        </div>
       </motion.div>
 
       {/* Today's Activity */}
@@ -162,7 +168,7 @@ export default function WalletBalance() {
         transition={{ delay: 0.1 }}
         className="card"
       >
-        <h3 className="font-semibold text-gray-900 mb-4">Today's Activity</h3>
+        <h3 className="font-semibold text-gray-900 dark:text-white mb-4">Today's Activity</h3>
         
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div className="text-center">
@@ -195,10 +201,10 @@ export default function WalletBalance() {
           className="card"
         >
           <div className="flex items-center justify-between mb-4">
-            <h3 className="font-semibold text-gray-900">Recent Activity</h3>
-            <a href="/history" className="text-primary-600 text-sm hover:text-primary-700">
+            <h3 className="font-semibold text-gray-900 dark:text-white">Recent Activity</h3>
+            <Link href="/send-money" className="text-indigo-600 text-sm hover:text-indigo-700 font-medium">
               View All
-            </a>
+            </Link>
           </div>
           
           <div className="space-y-3">
@@ -217,7 +223,7 @@ export default function WalletBalance() {
                     )}
                   </div>
                   <div>
-                    <div className="font-medium text-gray-900 text-sm">
+                    <div className="font-medium text-gray-900 dark:text-white text-sm">
                       {transaction.description}
                     </div>
                     <div className="text-xs text-gray-500">

@@ -2,6 +2,7 @@
   "name": "probaho-wallet",
   "version": "0.1.0",
   "private": true,
+
   "workspaces": [
     "apps/*",
     "packages/*"
@@ -18,8 +19,8 @@
     "build:shared": "npm run build --workspace=@probaho/shared"
   },
   "devDependencies": {
-    "turbo": "^1.10.12",
     "@types/node": "^20",
+    "turbo": "^1.13.4",
     "typescript": "^5"
   }
 }

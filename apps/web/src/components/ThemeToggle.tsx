@@ -1,33 +1,16 @@
-"use client"
+'use client'
 
-import { useEffect, useState } from 'react'
-import { MoonIcon, SunIcon } from '@heroicons/react/24/outline'
-
-function getInitialTheme(): 'light' | 'dark' {
-  if (typeof window === 'undefined') return 'light'
-  const stored = window.localStorage.getItem('theme') as 'light' | 'dark' | null
-  if (stored) return stored
-  return 'light'
-}
+import { SunIcon, MoonIcon } from '@heroicons/react/24/outline'
+import { useTheme } from '@/hooks/useTheme'
 
 export default function ThemeToggle() {
-  const [theme, setTheme] = useState<'light' | 'dark'>(getInitialTheme)
-
-  useEffect(() => {
-    const root = document.documentElement
-    if (theme === 'dark') {
-      root.classList.add('dark')
-    } else {
-      root.classList.remove('dark')
-    }
-    window.localStorage.setItem('theme', theme)
-  }, [theme])
+  const { theme, toggleTheme } = useTheme()
 
   return (
     <button
-      aria-label="Toggle dark mode"
-      onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-      className="p-2 rounded-lg border border-gray-200 hover:bg-gray-50 dark:border-gray-700 dark:hover:bg-gray-800 transition-colors"
+      onClick={toggleTheme}
+      className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+      aria-label="Toggle theme"
     >
       {theme === 'dark' ? (
         <SunIcon className="h-5 w-5 text-yellow-400" />

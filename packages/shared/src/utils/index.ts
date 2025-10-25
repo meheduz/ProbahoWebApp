@@ -195,14 +195,4 @@ export function generateSecureToken(): string {
   return Array.from(array, byte => byte.toString(16).padStart(2, '0')).join('')
 }
 
-// Platform detection
-export function isWeb(): boolean {
-  return typeof window !== 'undefined'
-}
 
-export function isMobile(): boolean {
-  if (isWeb()) {
-    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
-  }
-  return true // Assume mobile in React Native
-}
